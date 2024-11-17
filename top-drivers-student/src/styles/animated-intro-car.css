@@ -1,0 +1,30 @@
+/* AnimatedCar.css */
+.animation-container {
+    position: relative;
+    overflow: hidden; /* Hide overflow for a clean effect */
+    height: 55vh; /* Full height for visibility */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.animated-car {
+    position: absolute;
+    width: 500px; /* Adjust size as needed */
+    animation: driveIn 10s forwards; /* Smooth movement */
+}
+
+@keyframes driveIn {
+    0% {
+        transform: translateZ(-2000px) scale(0.05); /* Start far away and small */
+        opacity: 0.8; /* Invisible at the start */
+    }
+    50% {
+        transform: translateZ(0) scale(1); /* Move to center and normal size */
+        opacity: 1; /* Fully visible */
+    }
+    100% {
+        transform: translateZ(0) scale(1); /* End in center */
+        opacity: 1; /* Fully visible */
+    }
+}
