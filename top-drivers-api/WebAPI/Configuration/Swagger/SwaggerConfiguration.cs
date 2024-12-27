@@ -60,7 +60,19 @@ public static class SwaggerConfiguration
     /// <returns>WebApplication object with changes applied</returns>
     public static WebApplication LoadSwagger(this WebApplication app)
     {
-        app.UseSwagger();
+        app.UseSwagger(opt =>
+        {
+            var environment = app.Services.GetRequiredService<IHostEnvironment>();
+            if (environment.IsProduction())
+            {
+                opt.RouteTemplate = "api/swagger/{documentName}/swagger.json";
+            }
+            else
+            {
+                opt.RouteTemplate = "swagger/{documentName}/swagger.json";
+            }
+        });
+
         app.UseSwaggerUI(opt =>
         {
             var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
@@ -69,7 +81,19 @@ public static class SwaggerConfiguration
             
             foreach (var groupName in groupNames)
             {
-                opt.SwaggerEndpoint($"/swagger/{groupName}/swagger.json", groupName.ToUpperInvariant());
+                var environment = app.Services.GetRequiredService<IHostEnvironment>();
+                if (environment.IsProduction())
+                {
+                    // Production: Swagger under /api/swagger
+                    opt.SwaggerEndpoint($"/api/swagger/{groupName}/swagger.json", groupName.ToUpperInvariant());
+                    opt.RoutePrefix = "api/swagger";
+                }
+                else
+                {
+                    // Local: Swagger under /swagger
+                    opt.SwaggerEndpoint($"/swagger/{groupName}/swagger.json", groupName.ToUpperInvariant());
+                    opt.RoutePrefix = "swagger";
+                }
             }
         });
 

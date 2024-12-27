@@ -4,7 +4,7 @@ export const Courses = () => {
     return (
         <section className="section courses" id="courses">
             <h1 className="section_course_title">
-                Conoce nuestros cursos disponibles
+                NUESTROS CURSOS:
             </h1>
 
             <Swiper />

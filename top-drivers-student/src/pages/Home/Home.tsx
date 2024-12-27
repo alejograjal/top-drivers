@@ -10,16 +10,12 @@ export const Home = () => {
                 <div className="home__container container grid">
                     <div className="home__data">
                         <h1 className="home__title">
-                            Escuela de Manejo Top Drivers
+                            Escuela de Manejo <span className="top">TOP</span> <span className="drivers">DRIV</span><span className="ers">ERS</span>
                         </h1>
 
                         <h2 className="home__subtitle">
-                            Dedicación exclusiva y atención personalizada
+                            Expertos en formación de conductores
                         </h2>
-
-                        <h3 className="home__elec">
-                            Toyota Yaris de 3ra generación
-                        </h3>
 
                         <AnimatedHomeCar />
                     </div>

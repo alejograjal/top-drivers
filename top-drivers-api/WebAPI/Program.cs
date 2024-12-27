@@ -47,7 +47,8 @@ builder.Services.AddCors(options =>
                                             "https://newsite.escuelademanejotopdrivers.com",
                                             "http://newsite.escuelademanejotopdrivers.com ")  
                                 .AllowAnyHeader()
-                                .AllowAnyMethod(); 
+                                .AllowAnyMethod()
+                                .AllowCredentials(); 
                       });
 });
 

@@ -32,6 +32,7 @@ export const Swiper = () => {
                 navigation
                 modules={[Navigation]}
                 pagination={{ clickable: true }}
+                loop={true}
                 breakpoints={{
                     767: {
                         slidesPerView: 1,
@@ -50,11 +51,15 @@ export const Swiper = () => {
                             {course.description?.split('\n').map((line, index) => <p key={index}>{line}</p>)}
                         </h3>
 
-                        <div className="course__data">
-                            <div className="course__data-group remix-icon-fs-24">
-                                <i className="ri-hourglass-fill"></i> {course.duration} horas
-                            </div>
-                        </div>
+                        {
+                            course.duration !== 0 ?
+                                (<div className="course__data">
+                                    <div className="course__data-group remix-icon-fs-24">
+                                        <i className="ri-hourglass-fill"></i> {course.duration} horas
+                                    </div>
+                                </div>) :
+                                ''
+                        }
 
                         {course.cost !== 0 ? <h3 className="course__price">¢{course.cost}</h3> : ''}
                     </SwiperSlide>))

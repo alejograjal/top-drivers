@@ -18,7 +18,7 @@
   /*.5rem = 8px | 1rem = 16px ...*/
   --body-font: 'Exo', sans-serif;
   --h1-huge-font-size: 2rem;
-  --h1-font-size: 1.5rem;
+  --h1-font-size: 1.4rem;
   --h2-font-size: 1.25rem;
   --h3-font-size: 1rem;
   --normal-font-size: .938rem;
@@ -35,7 +35,7 @@
 /* Responsive typography */
 @media screen and (min-width: 968px) {
   :root {
-    --h1-font-size: 2.25rem;
+    --h1-font-size: 2rem;
     --h1-huge-font-size: 3rem;
     --h2-font-size: 1.5rem;
     --h3-font-size: 1.25rem;
@@ -104,6 +104,25 @@ img {
 }
 
 .section_course_title {
+  font-size: var(--h1-font-size);
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.section_gallery_title {
+  font-size: var(--h1-font-size);
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.section_opinions_title {
+  font-size: var(--h1-font-size);
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding: 0 1rem;
+}
+
+.section_videos_title {
   font-size: var(--h1-font-size);
   text-align: center;
   margin-bottom: 2.5rem;
@@ -258,7 +277,7 @@ img {
 }
 
 .home__subtitle {
-  font-size: var(--h3-font-size);
+  font-size: var(--h1-font-size);
   margin-bottom: .25rem;
 }
 
@@ -943,6 +962,11 @@ img {
   .offer__data {
     margin-bottom: 4rem;
   }
+  .reduced-section {
+    width: 100%;
+    margin: 0 auto;
+    height: 900px;
+  }
 }
 
 @media screen and (min-width: 767px) {
@@ -972,6 +996,11 @@ img {
   }
   .footer__container {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .reduced-section {
+    width: 100%;
+    margin: 0 auto;
+    height: 900px;
   }
 }
 
@@ -1121,6 +1150,12 @@ img {
   .scrollup {
     right: 3rem;
   }
+
+  .reduced-section {
+    width: 100%;
+    margin: 0 auto;
+    height: 900px;
+  }
 }
 
 .nav__list > .nav__item > .nav__link
@@ -1136,4 +1171,57 @@ img {
   opacity: 0 !important; /* Hide elements initially */
   visibility: visible !important; /* Keep them visible in the DOM, just hidden */
   transition: opacity 0.5s ease-in-out; /* Smooth transition for reveal */
+}
+
+.icon-center {
+  font-size: 3rem; 
+}
+
+.home__title .top {
+  color: red;
+}
+
+.home__title .drivers {
+  color: white;
+}
+
+.home__title .ers {
+  color: yellow;
+}
+
+.swiper-slide{
+  height: 428px !important;
+}
+
+.section_gallery_title {
+  padding: 0 10px; 
+}
+
+/* .section_gallery_title {
+  text-align: center;
+  font-size: 1.5rem; 
+  margin: 20px 0;
+} */
+
+@media screen and (max-width: 768px) {
+  .section_gallery_title .icon-center {
+      font-size: 1.5rem;
+  }
+}
+
+.video-container {
+  width: 50%;
+  margin-bottom: 20px;
+  transition: width 0.3s ease;
+}
+
+.video-container .video-player {
+  width: 100%;
+  border-radius: 8px;
+}
+
+@media (max-width: 1024px) {
+  .video-container {
+    width: 100%;
+  }
 }

@@ -5,6 +5,10 @@ export const Footer = () => {
         window.open('https://api.whatsapp.com/send?phone=50664705196&text=Vi%20la%20p%C3%A1gina%20web%20que%20dise%C3%B1aste%20y%20estoy%20interesado', '_blank'); // WhatsApp link (add specific number if needed)
     };
 
+    const handleWhatsAppTopDriversClick = () => {
+        window.open('https://api.whatsapp.com/send?phone=50683797829', '_blank'); // WhatsApp link (add specific number if needed)
+      };
+
     return (
         <footer className="footer section">
             <div className="shape shape__big"></div>
@@ -21,7 +25,7 @@ export const Footer = () => {
                         Top Drivers
                     </a>
                     <p className="footer__description">
-                        Decidete con nosotros
+                        Decídete con nosotros
                         y comienza tu camino hoy. <br />
                         Somos tu mejor opción
                     </p>
@@ -46,10 +50,10 @@ export const Footer = () => {
                     <h3 className="footer__title">Información</h3>
                     <ul className="footer__links">
                         <li>
-                            <a href="#" className="footer__link">Solicita las tarifas</a>
+                            <a href="#" className="footer__link" onClick={handleWhatsAppTopDriversClick}>Solicita las tarifas</a>
                         </li>
                         <li>
-                            <a href="#" className="footer__link">Contactanos</a>
+                            <a href="#" className="footer__link" onClick={handleWhatsAppTopDriversClick}>Contactanos</a>
                         </li>
                     </ul>
                 </div>
@@ -72,7 +76,7 @@ export const Footer = () => {
             </div>
 
             <span className="footer__copy" onClick={handleWhatsAppClick}>
-                &#169; Bedimcode. Todos los derechos reservados - Top Drivers - Creada por Alejandro Grajal
+                &#169; Todos los derechos reservados - Top Drivers - Creada por Alejandro Grajal
             </span>
         </footer>
     );

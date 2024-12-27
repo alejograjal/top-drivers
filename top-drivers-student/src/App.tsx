@@ -5,6 +5,7 @@ import 'remixicon/fonts/remixicon.css'
 import { Footer } from './components/Footer/Footer';
 import { Header } from './components/Header/Header';
 import { BodyContent } from './components/Body/BodyContent';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { FloatingButtons } from './components/FloatingButton/FloatingButtons';
 
@@ -43,10 +44,27 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Header />
-      <BodyContent />
-      <Footer />
-      <FloatingButtons />
+      <HelmetProvider>
+        <Helmet>
+          <title>Escuela de Manejo Top Drivers | Alajuela - Heredia</title>
+          <meta
+            name="description"
+            content="Somos una escuela de manejo en alajuela y heredia muy completa. Curso de manejo integral. Te ayudamos con tu prueba de manejo(práctica)."
+          />
+          <meta name="robots" content="index, follow" />
+          <meta property="og:title" content="Escuela de Manejo Top Drivers | Alajuela - Heredia" />
+          <meta property="og:description" content="Somos una escuela de manejo en alajuela y heredia muy completa. Curso de manejo integral. Te ayudamos con tu prueba de manejo(práctica)." />
+          <meta property="og:image" content="https://escuelademanejotopdrivers.com:8080/logoTopDrivers.webp" />
+          <meta property="og:url" content="https://www.escuelademanejotopdrivers.com" />
+          <meta property="og:type" content="website" />
+          <meta property="og:site_name" content="Top Drivers" />
+        </Helmet>
+
+        <Header />
+        <BodyContent />
+        <Footer />
+        <FloatingButtons />
+      </HelmetProvider>
     </QueryClientProvider>
   );
 }

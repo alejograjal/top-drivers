@@ -25,6 +25,7 @@ export const FloatingButtons = () => {
         flexDirection: 'column',
         alignItems: 'flex-end',
         gap: 16,
+        zIndex: 9999,
       }}
     >
       <Fab

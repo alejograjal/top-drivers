@@ -1,0 +1,25 @@
+# robots.txt file for https://newsite.escuelademanejotopdrivers.com (SPA with sections: inicio, cursos, galería, videos, opiniones)
+
+# Allow all user agents (search engines) to crawl all pages
+User-agent: *
+Disallow: 
+
+# Optionally, block specific pages or directories that shouldn't be indexed (like admin, login, etc.)
+Disallow: /admin/        # Block admin section if applicable
+Disallow: /login/        # Block login page if applicable
+Disallow: /private/      # Block any private sections
+
+# Optional: Block dynamic content like search results or unnecessary pages (if applicable)
+Disallow: /search/       # Block search results page
+
+# Provide the location of your sitemap for better crawling and indexing
+Sitemap: https://newsite.escuelademanejotopdrivers.com/sitemap.xml
+
+# Optional: Disallow specific file types (e.g., PDFs)
+Disallow: /*.pdf$
+
+# Optional: Block specific crawlers from certain areas (if needed)
+User-agent: BadBot
+Disallow: /
+
+# End of robots.txt file
