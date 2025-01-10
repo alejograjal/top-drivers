@@ -7,7 +7,7 @@ export const Footer = () => {
 
     const handleWhatsAppTopDriversClick = () => {
         window.open('https://api.whatsapp.com/send?phone=50683797829', '_blank'); // WhatsApp link (add specific number if needed)
-      };
+    };
 
     return (
         <footer className="footer section">
@@ -25,35 +25,20 @@ export const Footer = () => {
                         Top Drivers
                     </a>
                     <p className="footer__description">
-                        Decídete con nosotros
-                        y comienza tu camino hoy. <br />
-                        Somos tu mejor opción
+                        Somos una escuela técnica de manejo, comprometidos al 100% con nuestros alumnos
                     </p>
-                </div>
-
-                <div className="footer__content">
-                    <h3 className="footer__title">Compañia</h3>
-                    <ul className="footer__links">
-                        <li>
-                            <a href="#" className="footer__link">Acerca de</a>
-                        </li>
-                        <li>
-                            <a href="#" className="footer__link">Conocenos</a>
-                        </li>
-                        <li>
-                            <a href="#" className="footer__link">Historia</a>
-                        </li>
-                    </ul>
                 </div>
 
                 <div className="footer__content">
                     <h3 className="footer__title">Información</h3>
                     <ul className="footer__links">
                         <li>
-                            <a href="#" className="footer__link" onClick={handleWhatsAppTopDriversClick}>Solicita las tarifas</a>
+                            <a href="#" className="footer__link yellow" onClick={handleWhatsAppTopDriversClick}>Solicita las tarifas</a>
                         </li>
                         <li>
-                            <a href="#" className="footer__link" onClick={handleWhatsAppTopDriversClick}>Contactanos</a>
+                            <a href="#" className="footer__link" onClick={handleWhatsAppTopDriversClick}>
+                                Ingrese al whatsapp
+                            </a>
                         </li>
                     </ul>
                 </div>

@@ -16,8 +16,23 @@ export const BodyContent = () => {
             delay: 400,
         });
 
-        sr.reveal(`.home__title, .popular__container, .features__img, .featured__filters`)
-        sr.reveal(`.home__subtitle`, { delay: 600 });
+        const srLeft = scrollReveal({
+            origin: 'left',
+            distance: '60px',
+            duration: 2500,
+            delay: 400,
+        });
+
+        const srRight = scrollReveal({
+            origin: 'right',
+            distance: '60px',
+            duration: 2500,
+            delay: 400,
+        });
+
+        sr.reveal(`.popular__container, .features__img, .featured__filters`)
+        srLeft.reveal(`.home__title`, { delay: 600 });
+        srRight.reveal(`.home__subtitle`, { delay: 600, origin: 'left' });
         sr.reveal(`.home__elec`, { delay: 600 });
         sr.reveal(`.home__img`, { delay: 800 });
         sr.reveal(`.home__car-data`, { delay: 900, interval: 100, origin: 'bottom' });
@@ -26,6 +41,7 @@ export const BodyContent = () => {
         sr.reveal(`.section_gallery_title`, { delay: 600 })
         sr.reveal(`.section_opinions_title`, { delay: 600 })
         sr.reveal(`.section_videos_title`, { delay: 600 })
+        sr.reveal(`.opinions__content`, { delay: 600 })
         sr.reveal(`.courses`, { delay: 600 })
         sr.reveal(`.about__group, .offer__data`, { origin: 'left' });
         sr.reveal(`.about__data, .offer__img`, { origin: 'right' });

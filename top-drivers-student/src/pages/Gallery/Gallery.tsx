@@ -43,7 +43,7 @@ export const Gallery = () => {
         <section className="section gallery" id="gallery">
             <h1 className="section_gallery_title">
                 <div className="icon-center remix-icon-fs-32">
-                    Aquí <i className="ri-arrow-down-fill"></i> algunos de nuestros alumnos que ganaron su licencia
+                    Aquí <i className="ri-arrow-down-fill yellow"></i> algunos de nuestros alumnos que ganaron su licencia
                 </div>
             </h1>
 

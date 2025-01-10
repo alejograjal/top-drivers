@@ -32,6 +32,7 @@ export const Swiper = () => {
                 navigation
                 modules={[Navigation]}
                 pagination={{ clickable: true }}
+                autoHeight={true}
                 loop={true}
                 breakpoints={{
                     767: {
@@ -48,7 +49,7 @@ export const Swiper = () => {
 
                         <h1 className="course__title">{course.name}</h1>
                         <h3 className="course__subtitle">
-                            {course.description?.split('\n').map((line, index) => <p key={index}>{line}</p>)}
+                            {course.description}
                         </h3>
 
                         {

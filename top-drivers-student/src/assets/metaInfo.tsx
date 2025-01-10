@@ -2,28 +2,33 @@ export const getMetaInfo = (activeSection: string) => {
     switch (activeSection) {
         case 'home':
             return {
-                title: 'Top Drivers - Home | Best Driver Courses',
-                description: 'Start your journey with Top Drivers. Explore our home page for the best driving courses and tips for success.',
+                title: 'Top Drivers - Inicio | Los Mejores Cursos de Manejo',
+                description: 'Comienza tu viaje con Top Drivers. Explora nuestra página de inicio para encontrar los mejores cursos de manejo y consejos para el éxito.',
             };
         case 'courses':
             return {
-                title: 'Top Drivers - Courses | Learn How to Drive Like a Pro',
-                description: 'Browse our wide selection of driver courses and get started today with professional instructors. Courses for all levels!',
+                title: 'Top Drivers - Cursos | Aprende a Manejar Como un Profesional',
+                description: 'Descubre nuestra amplia selección de cursos de manejo y comienza hoy mismo con instructores profesionales. ¡Cursos para todos los niveles!',
             };
         case 'gallery':
             return {
-                title: 'Top Drivers - Gallery | See Our Successful Drivers',
-                description: 'Explore our gallery of successful drivers and their stories. Get inspired by our top-performing students.',
+                title: 'Top Drivers - Galería | Conoce a Nuestros Conductores Exitosos',
+                description: 'Explora nuestra galería de conductores exitosos y sus historias. Inspírate con nuestros estudiantes destacados.',
+            };
+        case 'videos':
+            return {
+                title: 'Top Drivers - Videos | Aprende a Manejar con Nuestros Videos',
+                description: 'Mira videos introductorios sobre cómo manejar y adéntrate en todo lo relacionado con aprender a manejar con nosotros.',
             };
         case 'opinions':
             return {
-                title: 'Top Drivers - Opinions | Hear from Our Students',
-                description: 'Read real opinions and reviews from our students about their experiences with Top Drivers courses.',
+                title: 'Top Drivers - Opiniones | Escucha a Nuestros Estudiantes',
+                description: 'Lee opiniones y reseñas reales de nuestros estudiantes sobre sus experiencias con los cursos de Top Drivers.',
             };
         default:
             return {
-                title: 'Top Drivers - Best Driving Courses',
-                description: 'Discover the best driving courses at Top Drivers and start your driving journey today.',
+                title: 'Top Drivers - Los Mejores Cursos de Manejo',
+                description: 'Descubre los mejores cursos de manejo en Top Drivers y comienza tu viaje de conducción hoy mismo.',
             };
     }
 };
