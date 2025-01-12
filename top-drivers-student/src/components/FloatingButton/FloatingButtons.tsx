@@ -30,20 +30,6 @@ export const FloatingButtons = () => {
     >
       <Fab
         color="primary"
-        aria-label="whatsapp"
-        onClick={handleWhatsAppClick}
-        sx={{
-          backgroundColor: '#25D366',
-          '&:hover': {
-            backgroundColor: '#128C7E',
-          },
-        }}
-      >
-        <WhatsApp />
-      </Fab>
-
-      <Fab
-        color="primary"
         aria-label="facebook"
         onClick={handleFacebookClick}
         sx={{
@@ -68,6 +54,20 @@ export const FloatingButtons = () => {
         }}
       >
         <Instagram />
+      </Fab>
+
+      <Fab
+        color="primary"
+        aria-label="whatsapp"
+        onClick={handleWhatsAppClick}
+        sx={{
+          backgroundColor: '#25D366',
+          '&:hover': {
+            backgroundColor: '#128C7E',
+          },
+        }}
+      >
+        <WhatsApp />
       </Fab>
     </div>
   );

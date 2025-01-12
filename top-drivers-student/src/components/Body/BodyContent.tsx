@@ -37,17 +37,16 @@ export const BodyContent = () => {
         sr.reveal(`.home__img`, { delay: 800 });
         sr.reveal(`.home__car-data`, { delay: 900, interval: 100, origin: 'bottom' });
         sr.reveal(`.home__button`, { delay: 1000, origin: 'bottom' });
-        sr.reveal(`.section_course_title`, { delay: 600 })
-        sr.reveal(`.section_gallery_title`, { delay: 600 })
-        sr.reveal(`.section_opinions_title`, { delay: 600 })
-        sr.reveal(`.section_videos_title`, { delay: 600 })
-        sr.reveal(`.opinions__content`, { delay: 600 })
-        sr.reveal(`.courses`, { delay: 600 })
-        sr.reveal(`.about__group, .offer__data`, { origin: 'left' });
-        sr.reveal(`.about__data, .offer__img`, { origin: 'right' });
-        sr.reveal(`.features__map`, { delay: 600, origin: 'bottom' });
-        sr.reveal(`.features__card`, { interval: 300 });
-        sr.reveal(`.featured__card, .logos__content, .footer__content`, { interval: 100 });
+        sr.reveal(`.courses`, { delay: 600, origin: 'top' })
+        sr.reveal(`.gallery`, { delay: 600, origin: 'top'  })
+        sr.reveal(`.videos`, { delay: 600, origin: 'top' })
+        sr.reveal(`.opinions`, { delay: 600, origin: 'top' })
+        // sr.reveal(`.courses`, { delay: 600 })
+        // sr.reveal(`.about__group, .offer__data`, { origin: 'left' });
+        // sr.reveal(`.about__data, .offer__img`, { origin: 'right' });
+        // sr.reveal(`.features__map`, { delay: 600, origin: 'bottom' });
+        // sr.reveal(`.features__card`, { interval: 300 });
+        // sr.reveal(`.featured__card, .logos__content, .footer__content`, { interval: 100 });
 
     }, []);
 

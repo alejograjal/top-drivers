@@ -60,7 +60,7 @@ export const Header = () => {
                 <title>{title}</title>
             </Helmet>
             <nav className="nav container">
-                <Link to="/home" className="nav__logo">
+                <Link to="/home" className="nav__logo" onClick={(e) => handleLinkClick(e, 'home')}>
                     <img
                         src={topDriveLogo}
                         alt="Top Drivers Logo"
