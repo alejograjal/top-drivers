@@ -59,7 +59,8 @@ public static class AuthenticationExtension
             x.TokenValidationParameters = tokenValidationParameters;
         });
 
-        services.AddTransient<UserIdResolverFromBaseDTO>();
+        services.AddTransient<UserIdResolverCreateFromBaseDTO>();
+        services.AddTransient<UserIdResolverModifyFromBaseDTO>();
         services.AddScoped<IAuthorizationHandler, UserIdentityHandler>();
     }
 }

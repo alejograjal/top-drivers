@@ -1,3 +1,7 @@
+using Domain.Validations;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+
 namespace WebAPI.Configuration;
 
 /// <summary>
@@ -12,5 +16,9 @@ public static class FluentValidationConfiguration
     public static void ConfigureFluentValidation(this IServiceCollection services)
     {
         ArgumentNullException.ThrowIfNull(services);
+
+        services.AddValidatorsFromAssemblyContaining<CourseValidator>();
+
+        services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
     }
 }
