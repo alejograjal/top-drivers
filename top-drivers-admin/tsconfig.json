@@ -1,0 +1,49 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noUncheckedIndexedAccess": true,
+    "baseUrl": ".",
+    "paths": {
+      "assets/*": [
+        "src/assets/*"
+      ],
+      "components/*": [
+        "src/components/*"
+      ],
+      "pages/*": [
+        "src/pages/*"
+      ],
+      "hooks/*": [
+        "src/hooks/*"
+      ],
+      "api/*": [
+        "src/api/*"
+      ],
+      "types/*": [
+        "src/types/*"
+      ],
+      "utils/*": [
+        "src/utils/*"
+      ],
+      "navigation/*": [
+        "src/navigation/*"
+      ],
+      "stores/*": [
+        "src/stores/*"
+      ],
+      "contexts/*": [
+        "src/contexts/*"
+      ]
+    }
+  },
+}

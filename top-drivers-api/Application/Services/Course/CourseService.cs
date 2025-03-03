@@ -12,6 +12,7 @@ namespace Application.Services;
 
 public class CourseService(ICoreService<Course> coreService, IValidator<Course> courseValidator) : ICourseService
 {
+    /// <inheritdoc />
     public async Task<ResponseCourseDto> CreateAsync(RequestCourseDto requestCourseDto)
     {
         var course = ValidateCourse(requestCourseDto);
@@ -22,6 +23,7 @@ public class CourseService(ICoreService<Course> coreService, IValidator<Course> 
         return await GetByIdAsync(data.Id);
     }
 
+    /// <inheritdoc />
     public async Task<bool> DeleteAsync(long id)
     {
         if (!await ExistsCourseAsync(id))
@@ -40,7 +42,7 @@ public class CourseService(ICoreService<Course> coreService, IValidator<Course> 
     /// <inheritdoc />
     public async Task<IReadOnlyCollection<ResponseCourseDto>> GetAllAsync(bool includeDisabled = false)
     {
-        var query = coreService.UnitOfWork.Repository<Course>().AsQueryable().Where(m => m.IsEnabled || m.IsEnabled == !includeDisabled);
+        var query = coreService.UnitOfWork.Repository<Course>().AsQueryable().Where(m => m.IsActive && (m.IsEnabled || m.IsEnabled == !includeDisabled));
 
         return coreService.AutoMapper.Map<IReadOnlyCollection<ResponseCourseDto>>(await query.ToListAsync());
     }
@@ -48,11 +50,12 @@ public class CourseService(ICoreService<Course> coreService, IValidator<Course> 
     /// <inheritdoc />
     public async Task<IReadOnlyCollection<ResponseSimpleCourseDto>> GetAllAsync()
     {
-        var query = coreService.UnitOfWork.Repository<Course>().AsQueryable().Where(m => m.IsEnabled);
+        var query = coreService.UnitOfWork.Repository<Course>().AsQueryable().Where(m => m.IsActive && m.IsEnabled);
 
         return coreService.AutoMapper.Map<IReadOnlyCollection<ResponseSimpleCourseDto>>(await query.ToListAsync());
     }
 
+    /// <inheritdoc />
     public async Task<ResponseCourseDto> GetByIdAsync(long id)
     {
         var spec = new BaseSpecification<Course>(m => m.Id == id);
@@ -66,6 +69,7 @@ public class CourseService(ICoreService<Course> coreService, IValidator<Course> 
         return coreService.AutoMapper.Map<ResponseCourseDto>(course);
     }
 
+    /// <inheritdoc />
     public async Task<ResponseCourseDto> UpdateAsync(long courseId, RequestCourseDto requestCourseDto)
     {
         requestCourseDto.Id = courseId;

@@ -88,8 +88,8 @@ public class CourseController(ICourseService courseService) : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetails))]
     public async Task<IActionResult> UpdateAsync(long courseId, RequestCourseDto requestCourseDto)
     {
-        var savedCourse = await courseService.UpdateAsync(courseId, requestCourseDto);
-        return StatusCode(StatusCodes.Status200OK, savedCourse);
+        var updatedCourse = await courseService.UpdateAsync(courseId, requestCourseDto);
+        return StatusCode(StatusCodes.Status200OK, updatedCourse);
     }
 
     /// <summary>
@@ -103,7 +103,7 @@ public class CourseController(ICourseService courseService) : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetails))]
     public async Task<IActionResult> DeleteAsync(long courseId)
     {
-        var savedCourse = await courseService.DeleteAsync(courseId);
-        return StatusCode(StatusCodes.Status200OK, savedCourse);
+        var resultDelete = await courseService.DeleteAsync(courseId);
+        return StatusCode(StatusCodes.Status200OK, resultDelete);
     }
 }

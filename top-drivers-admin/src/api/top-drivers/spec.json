@@ -1,0 +1,1190 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Top Drivers WebAPI",
+    "description": "List of APIs to handle operations for the Top Drivers WebAPI app",
+    "contact": {
+      "name": "Alejandro Grajal",
+      "email": "alejandro.grajal.s@gmail.com"
+    },
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Authentication": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Logs in a user using the provided login model.",
+        "parameters": [
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The login credentials.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestUserLoginDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestUserLoginDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestUserLoginDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestUserLoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Authentication/refreshToken": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Refreshes the authentication token using the provided token model.",
+        "parameters": [
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The token refresh request.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Course": {
+      "get": {
+        "tags": [
+          "Course"
+        ],
+        "summary": "Get a list of all course with disabling filter option",
+        "parameters": [
+          {
+            "name": "includeDisabled",
+            "in": "query",
+            "description": "Filter to include or not the disabled courses",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseCourseDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseCourseDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseCourseDto"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Course"
+        ],
+        "summary": "Create a new course",
+        "parameters": [
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Course model",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestCourseDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestCourseDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestCourseDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestCourseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseCourseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseCourseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseCourseDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Course/{courseId}": {
+      "get": {
+        "tags": [
+          "Course"
+        ],
+        "summary": "Get a an exact existing course",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "description": "Course identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseCourseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseCourseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseCourseDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Course"
+        ],
+        "summary": "Update an existing course",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "description": "Course identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Course model to be udpated",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestCourseDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestCourseDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestCourseDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestCourseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseCourseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseCourseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseCourseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Course"
+        ],
+        "summary": "Delete an existing course",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "description": "Course identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/student-Course": {
+      "get": {
+        "tags": [
+          "Course"
+        ],
+        "summary": "Get a list of all course",
+        "parameters": [
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseSimpleCourseDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseSimpleCourseDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseSimpleCourseDto"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Resource": {
+      "get": {
+        "tags": [
+          "Resource"
+        ],
+        "summary": "Get a list of all resources",
+        "parameters": [
+          {
+            "name": "includeDisabled",
+            "in": "query",
+            "description": "Filter to include or not the disabled resources",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseResourceDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseResourceDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseResourceDto"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/student-Resource": {
+      "get": {
+        "tags": [
+          "Resource"
+        ],
+        "summary": "Get a list of all resources",
+        "parameters": [
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseSimpleResourceDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseSimpleResourceDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseSimpleResourceDto"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AuthenticationResult": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "token": {
+            "type": "string",
+            "nullable": true
+          },
+          "refreshToken": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErrorDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "details": {
+            "type": "string",
+            "nullable": true
+          },
+          "logLevel": {
+            "$ref": "#/components/schemas/LogLevel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LogLevel": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "RequestCourseDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "cost": {
+            "type": "number",
+            "format": "double"
+          },
+          "isPackage": {
+            "type": "boolean"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RequestUserLoginDto": {
+        "type": "object",
+        "properties": {
+          "nickName": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResponseCourseDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "cost": {
+            "type": "number",
+            "format": "double"
+          },
+          "isPackage": {
+            "type": "boolean"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "modified": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResponseResourceDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "path": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "modified": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResponseSimpleCourseDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "cost": {
+            "type": "number",
+            "format": "double"
+          },
+          "isPackage": {
+            "type": "boolean"
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResponseSimpleResourceDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TokenModel": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "nullable": true
+          },
+          "refreshToken": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "JWT Authorization header using Bearer schema",
+        "scheme": "Bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}
