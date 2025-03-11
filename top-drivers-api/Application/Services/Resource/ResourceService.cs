@@ -7,14 +7,27 @@ using Domain.Core.Specifications;
 using Application.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Application.Models.DTOs.Resource;
+using Application.Models.DTOs.ResourceLibrary;
 
 namespace Application.Services;
 
-public class ResourceService(ICoreService<Resource> coreService, IValidator<Resource> resourceValidator) : IResourceService
+public class ResourceService(ICoreService<Resource> coreService, ResourceLibraryPath resourceLibraryPath, IValidator<Resource> resourceValidator) : IResourceService
 {
     public async Task<ResponseResourceDto> CreateAsync(RequestResourceDto requestResourceDto)
     {
         var resource = ValidateResource(requestResourceDto);
+        resource.Path = Path.Combine(resourceLibraryPath.Path, $"{resource.Name}{Path.GetExtension(requestResourceDto.Resource.FileName)}");
+        resource.Url = Path.Combine(resourceLibraryPath.Url, $"{resource.Name}{Path.GetExtension(requestResourceDto.Resource.FileName)}");
+
+        if (!Directory.Exists(resourceLibraryPath.Path))
+        {
+            Directory.CreateDirectory(resourceLibraryPath.Path);
+        }
+
+        using (var fileStream = new FileStream(resource.Path, FileMode.Create, FileAccess.Write))
+        {
+            await requestResourceDto.Resource.CopyToAsync(fileStream);
+        }
 
         var data = await coreService.UnitOfWork.Repository<Resource>().AddAsync(resource);
         await coreService.UnitOfWork.SaveChangesAsync();
@@ -76,9 +89,23 @@ public class ResourceService(ICoreService<Resource> coreService, IValidator<Reso
             throw new NotFoundException("Imagen no existe");
         }
 
+        var existingResource = await GetByIdAsync(requestResourceDto.Id);
+
         var resource = ValidateResource(requestResourceDto);
+        resource.Path = Path.Combine(resourceLibraryPath.Path, $"{resource.Name}{Path.GetExtension(requestResourceDto.Resource.FileName)}");
+        resource.Url = Path.Combine(resourceLibraryPath.Url, $"{resource.Name}{Path.GetExtension(requestResourceDto.Resource.FileName)}");
         resource.Id = requestResourceDto.Id;
         resource.IsActive = true;
+
+        using (var fileStream = new FileStream(resource.Path, FileMode.Create, FileAccess.Write))
+        {
+            await requestResourceDto.Resource.CopyToAsync(fileStream);
+        }
+
+        if (File.Exists(existingResource.Path))
+        {
+            File.Delete(existingResource.Path);
+        }
 
         coreService.UnitOfWork.Repository<Resource>().Update(resource);
         await coreService.UnitOfWork.SaveChangesAsync();
@@ -86,7 +113,7 @@ public class ResourceService(ICoreService<Resource> coreService, IValidator<Reso
         return await GetByIdAsync(requestResourceDto.Id);
     }
 
-    private async Task<bool> ExistsResourcesync(long id) => await coreService.UnitOfWork.Repository<Course>().ExistsAsync(id);
+    private async Task<bool> ExistsResourcesync(long id) => await coreService.UnitOfWork.Repository<Resource>().ExistsAsync(id);
 
     private Resource ValidateResource(RequestResourceDto requestResourceDto)
     {

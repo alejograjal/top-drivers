@@ -521,7 +521,54 @@ export interface paths {
             };
         };
         put?: never;
-        post?: never;
+        /** Create a new resource */
+        post: {
+            parameters: {
+                query?: never;
+                header?: {
+                    "x-api-version"?: string;
+                };
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "multipart/form-data": {
+                        Name?: string;
+                        Description?: string;
+                        /** Format: binary */
+                        Resource?: string;
+                        IsEnabled?: boolean;
+                        /** Format: int64 */
+                        Id?: number;
+                    };
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ResponseCourseDto"];
+                        "application/json": components["schemas"]["ResponseCourseDto"];
+                        "text/json": components["schemas"]["ResponseCourseDto"];
+                    };
+                };
+                /** @description Internal Server Error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetails"];
+                        "application/json": components["schemas"]["ErrorDetails"];
+                        "text/json": components["schemas"]["ErrorDetails"];
+                    };
+                };
+            };
+        };
         delete?: never;
         options?: never;
         head?: never;
@@ -574,6 +621,170 @@ export interface paths {
         put?: never;
         post?: never;
         delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/Resource/{resourceId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get a an exact existing resource */
+        get: {
+            parameters: {
+                query?: never;
+                header?: {
+                    "x-api-version"?: string;
+                };
+                path: {
+                    /** @description Resource identifier */
+                    resourceId: number;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ResponseCourseDto"];
+                        "application/json": components["schemas"]["ResponseCourseDto"];
+                        "text/json": components["schemas"]["ResponseCourseDto"];
+                    };
+                };
+                /** @description Internal Server Error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetails"];
+                        "application/json": components["schemas"]["ErrorDetails"];
+                        "text/json": components["schemas"]["ErrorDetails"];
+                    };
+                };
+            };
+        };
+        /** Update an existing resource */
+        put: {
+            parameters: {
+                query?: never;
+                header?: {
+                    "x-api-version"?: string;
+                };
+                path: {
+                    /** @description Resource identifier */
+                    resourceId: number;
+                };
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "multipart/form-data": {
+                        Name?: string;
+                        Description?: string;
+                        /** Format: binary */
+                        Resource?: string;
+                        IsEnabled?: boolean;
+                        /** Format: int64 */
+                        Id?: number;
+                    };
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ResponseCourseDto"];
+                        "application/json": components["schemas"]["ResponseCourseDto"];
+                        "text/json": components["schemas"]["ResponseCourseDto"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetails"];
+                        "application/json": components["schemas"]["ErrorDetails"];
+                        "text/json": components["schemas"]["ErrorDetails"];
+                    };
+                };
+                /** @description Internal Server Error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetails"];
+                        "application/json": components["schemas"]["ErrorDetails"];
+                        "text/json": components["schemas"]["ErrorDetails"];
+                    };
+                };
+            };
+        };
+        post?: never;
+        /** Delete an existing resource */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: {
+                    "x-api-version"?: string;
+                };
+                path: {
+                    /** @description Resource identifier */
+                    resourceId: number;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": boolean;
+                        "application/json": boolean;
+                        "text/json": boolean;
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetails"];
+                        "application/json": components["schemas"]["ErrorDetails"];
+                        "text/json": components["schemas"]["ErrorDetails"];
+                    };
+                };
+                /** @description Internal Server Error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetails"];
+                        "application/json": components["schemas"]["ErrorDetails"];
+                        "text/json": components["schemas"]["ErrorDetails"];
+                    };
+                };
+            };
+        };
         options?: never;
         head?: never;
         patch?: never;

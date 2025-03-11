@@ -246,7 +246,6 @@ export const CourseNewEdit = ({ courseData }: { courseData: Course | undefined |
                             )}
                         </Box>
 
-
                         <FormButtons backPath="/Curso" loadingIndicator={loading} />
                     </Stack>
                 </form>

@@ -62,7 +62,7 @@ public class ResourceController(IResourceService resourceService) : ControllerBa
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ResponseCourseDto))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetails))]
-    public async Task<IActionResult> CreateAsync(RequestResourceDto requestResourceDto)
+    public async Task<IActionResult> CreateAsync([FromForm] RequestResourceDto requestResourceDto)
     {
         var savedResource = await resourceService.CreateAsync(requestResourceDto);
         return StatusCode(StatusCodes.Status201Created, savedResource);
@@ -78,7 +78,7 @@ public class ResourceController(IResourceService resourceService) : ControllerBa
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseCourseDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetails))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetails))]
-    public async Task<IActionResult> UpdateAsync(long resourceId, RequestResourceDto requestResourceDto)
+    public async Task<IActionResult> UpdateAsync(long resourceId, [FromForm] RequestResourceDto requestResourceDto)
     {
         var updateResource = await resourceService.UpdateAsync(resourceId, requestResourceDto);
         return StatusCode(StatusCodes.Status200OK, updateResource);

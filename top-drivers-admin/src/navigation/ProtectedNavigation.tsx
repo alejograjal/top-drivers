@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import { Course } from "pages/Course/Course";
 import { CourseNewEditWrapper } from "pages/Course/CourseNewEditWrapper";
 import { Image } from "pages/Image/Image";
+import { ImageNewEditWrapper } from "pages/Image/ImageNewEditWrapper";
 
 export const routesProtected = [
     {
@@ -29,6 +30,16 @@ export const routesProtected = [
         name: 'Imagen',
         path: '/Imagen',
         element: <Image />
+    },
+    {
+        name: 'CrearImagen',
+        path: '/Imagen/Nueva',
+        element: <ImageNewEditWrapper />
+    },
+    {
+        name: 'EditarImagen',
+        path: '/Imagen/:imageId',
+        element: <ImageNewEditWrapper />
     }
 ]
 

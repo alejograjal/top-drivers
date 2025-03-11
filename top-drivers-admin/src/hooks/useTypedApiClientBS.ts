@@ -14,11 +14,15 @@ const getHeaders = (disableAuth: boolean, token: string): Record<string, string>
 }
 
 const arrayWrapperMiddleware: Middleware = async (url, init, next) => {
-    if (init?.body) {
-        const body = JSON.parse(init.body as string);
-        const keys = Object.keys(body);
-        if (keys.length === 1 && Array.isArray(body[String(keys[0])])) {
-            init.body = JSON.stringify(body[String(keys[0])]);
+    if (init?.body && typeof init.body === "string") {
+        try {
+            const body = JSON.parse(init.body);
+            const keys = Object.keys(body);
+            if (keys.length === 1 && Array.isArray(body[String(keys[0])])) {
+                init.body = JSON.stringify(body[String(keys[0])]);
+            }
+        } catch (error) {
+            console.warn("No se pudo parsear el body como JSON, posiblemente no es JSON.", error);
         }
     }
     return next(url, init);
@@ -46,10 +50,9 @@ export const useTypedApiClientBS = <
         use: [arrayWrapperMiddleware]
     });
 
-
-
     return fetcher.path(path).method(method).create({}) as TypedFetch<paths[PathT][MethodT]>;
 }
+
 
 export const castRequestBody = <
     PathT extends keyof paths,
@@ -60,6 +63,7 @@ export const castRequestBody = <
     method: MethodT
 ): paths[PathT][MethodT] extends { requestBody: { content: { 'application/json': infer R } } } ? R | undefined : never => {
     if (method === 'post' || method === 'put' || method === 'patch') {
+
         return data as paths[PathT][MethodT] extends { requestBody: { content: { 'application/json': infer R } } } ? R : never;
     }
 
@@ -80,6 +84,37 @@ export const castRequestBody = <
 
             return pathObj as never;
         }
+    }
+
+    return undefined as never;
+};
+
+export const castRequestBodyMultipart = <
+    PathT extends keyof paths,
+    MethodT extends keyof paths[PathT]
+>(
+    data: unknown,
+    method: MethodT
+): paths[PathT][MethodT] extends { requestBody: { content: { "multipart/form-data": infer FormData } } } ? FormData | undefined : never => {
+
+    if (method === "post" || method === "put" || method === "patch") {
+        const formData = new FormData();
+        const requestData = data as Record<string, unknown>;
+
+        for (const key in requestData) {
+            const value = requestData[key];
+
+            if (value instanceof File || value instanceof Blob) {
+                formData.append(key, value);
+            } else if (Array.isArray(value)) {
+                value.forEach((item, index) => {
+                    formData.append(`${key}[${index}]`, String(item));
+                });
+            } else if (value !== undefined && value !== null) {
+                formData.append(key, String(value));
+            }
+        }
+        return formData as paths[PathT][MethodT] extends { requestBody: { content: { "multipart/form-data": infer FormData } } } ? FormData : never;
     }
 
     return undefined as never;

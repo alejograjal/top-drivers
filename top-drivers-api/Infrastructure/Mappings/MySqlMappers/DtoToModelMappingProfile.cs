@@ -4,6 +4,7 @@ using TopDrivers.Infrastructure;
 using Application.Models.DTOs.Course;
 using Application.Models.DTOs.Core;
 using Infrastructure.Mappings.ValueResolvers;
+using Application.Models.DTOs.Resource;
 
 namespace Infrastructure.Mappings.MySqlMappers;
 
@@ -23,5 +24,8 @@ public class DtoToModelMappingProfile : Profile
 
         CreateMap<RequestCourseDto, Course>()
             .IncludeBase<RequestBaseDto, BaseEntity>();
+
+        CreateMap<RequestResourceDto, Resource>()
+        .IncludeBase<RequestBaseDto, BaseEntity>();
     }
 }
