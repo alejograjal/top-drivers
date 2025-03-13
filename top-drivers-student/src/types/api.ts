@@ -1,3 +1,4 @@
 import { type components } from "api/topdrivers/api";
 
-export type Courses = components['schemas']['ResponseSimpleCourseDto']
+export type Course = components['schemas']['ResponseSimpleCourseDto']
+export type Image = components['schemas']['ResponseSimpleResourceDto']

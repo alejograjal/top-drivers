@@ -8,9 +8,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "api:generate": "openapi-typescript ./src/api/topdrivers/spec.json -o ./src/api/topdrivers/api.d.ts",
-    "api:update": "curl -s https://escuelademanejotopdrivers.com/api/swagger/v1/swagger.json -o ./src/api/topdrivers/spec.json && sed -i '' 's/; x-api-version=[0-9]*//' ./src/api/topdrivers/spec.json && npx openapi-typescript ./src/api/topdrivers/spec.json -o ./src/api/topdrivers/api.d.ts",
-    "api:update-local": "curl -s http://localhost:5191/swagger/v1/swagger.json -o ./src/api/topdrivers/spec.json && sed -i '' 's/; x-api-version=[0-9]*//' ./src/api/topdrivers/spec.json && npx openapi-typescript ./src/api/topdrivers/spec.json -o ./src/api/topdrivers/api.d.ts"
+    "top-drivers:generate": "openapi-typescript ./src/api/topdrivers/spec.json -o ./src/api/topdrivers/api.d.ts",
+    "top-drivers:update": "curl -s https://escuelademanejotopdrivers.com/api/swagger/v1/swagger.json -o ./src/api/topdrivers/spec.json && sed -i '' 's/; x-api-version=[0-9]*//' ./src/api/topdrivers/spec.json && npx openapi-typescript ./src/api/topdrivers/spec.json -o ./src/api/topdrivers/api.d.ts",
+    "top-drivers:update-local": "curl -s http://localhost:5191/swagger/v1/swagger.json -o ./src/api/topdrivers/spec.json && sed -i '' 's/; x-api-version=[0-9]*//' ./src/api/topdrivers/spec.json && npx openapi-typescript ./src/api/topdrivers/spec.json -o ./src/api/topdrivers/api.d.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -29,15 +29,17 @@
     "react-router-dom": "^6.27.0",
     "remixicon": "^4.5.0",
     "scrollreveal": "^4.0.9",
-    "swiper": "^11.1.14"
+    "swiper": "^11.2.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
+    "@types/node": "^22.13.10",
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
     "@types/react-helmet": "^6.1.11",
     "@types/react-image-gallery": "^1.2.4",
     "@types/scrollreveal": "^0.0.11",
+    "@types/swiper": "^5.4.3",
     "@vitejs/plugin-react": "^4.3.2",
     "eslint": "^9.11.1",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",

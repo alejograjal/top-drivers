@@ -1,8 +1,8 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { useTypedApiClient } from "../../hooks/useTypeApiClient";
-import { Courses } from "types/api";
+import { Course } from "types/api";
 
-export const useGetCourses = (): UseQueryResult<Array<Courses>> => {
+export const useGetCourses = (): UseQueryResult<Array<Course>> => {
     const getCourses = useTypedApiClient({
         path: '/api/student-Course',
         method: 'get'

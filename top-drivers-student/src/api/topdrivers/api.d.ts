@@ -142,6 +142,158 @@ export interface paths {
         };
       };
     };
+    /** Create a new course */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+      };
+      /** @description Course model */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestCourseDto"];
+          "application/json": components["schemas"]["RequestCourseDto"];
+          "text/json": components["schemas"]["RequestCourseDto"];
+          "application/*+json": components["schemas"]["RequestCourseDto"];
+        };
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": components["schemas"]["ResponseCourseDto"];
+            "application/json": components["schemas"]["ResponseCourseDto"];
+            "text/json": components["schemas"]["ResponseCourseDto"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetails"];
+            "application/json": components["schemas"]["ErrorDetails"];
+            "text/json": components["schemas"]["ErrorDetails"];
+          };
+        };
+      };
+    };
+  };
+  "/api/Course/{courseId}": {
+    /** Get a an exact existing course */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description Course identifier */
+          courseId: number;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseCourseDto"];
+            "application/json": components["schemas"]["ResponseCourseDto"];
+            "text/json": components["schemas"]["ResponseCourseDto"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetails"];
+            "application/json": components["schemas"]["ErrorDetails"];
+            "text/json": components["schemas"]["ErrorDetails"];
+          };
+        };
+      };
+    };
+    /** Update an existing course */
+    put: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description Course identifier */
+          courseId: number;
+        };
+      };
+      /** @description Course model to be udpated */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestCourseDto"];
+          "application/json": components["schemas"]["RequestCourseDto"];
+          "text/json": components["schemas"]["RequestCourseDto"];
+          "application/*+json": components["schemas"]["RequestCourseDto"];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseCourseDto"];
+            "application/json": components["schemas"]["ResponseCourseDto"];
+            "text/json": components["schemas"]["ResponseCourseDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetails"];
+            "application/json": components["schemas"]["ErrorDetails"];
+            "text/json": components["schemas"]["ErrorDetails"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetails"];
+            "application/json": components["schemas"]["ErrorDetails"];
+            "text/json": components["schemas"]["ErrorDetails"];
+          };
+        };
+      };
+    };
+    /** Delete an existing course */
+    delete: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description Course identifier */
+          courseId: number;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": boolean;
+            "application/json": boolean;
+            "text/json": boolean;
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetails"];
+            "application/json": components["schemas"]["ErrorDetails"];
+            "text/json": components["schemas"]["ErrorDetails"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetails"];
+            "application/json": components["schemas"]["ErrorDetails"];
+            "text/json": components["schemas"]["ErrorDetails"];
+          };
+        };
+      };
+    };
   };
   "/api/student-Course": {
     /** Get a list of all course */
@@ -202,6 +354,45 @@ export interface paths {
         };
       };
     };
+    /** Create a new resource */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+      };
+      requestBody?: {
+        content: {
+          "multipart/form-data": {
+            Name?: string;
+            Description?: string;
+            /** Format: binary */
+            Resource?: string;
+            IsEnabled?: boolean;
+            /** Format: int64 */
+            Id?: number;
+          };
+        };
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": components["schemas"]["ResponseCourseDto"];
+            "application/json": components["schemas"]["ResponseCourseDto"];
+            "text/json": components["schemas"]["ResponseCourseDto"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetails"];
+            "application/json": components["schemas"]["ErrorDetails"];
+            "text/json": components["schemas"]["ErrorDetails"];
+          };
+        };
+      };
+    };
   };
   "/api/student-Resource": {
     /** Get a list of all resources */
@@ -218,6 +409,127 @@ export interface paths {
             "text/plain": components["schemas"]["ResponseSimpleResourceDto"][];
             "application/json": components["schemas"]["ResponseSimpleResourceDto"][];
             "text/json": components["schemas"]["ResponseSimpleResourceDto"][];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetails"];
+            "application/json": components["schemas"]["ErrorDetails"];
+            "text/json": components["schemas"]["ErrorDetails"];
+          };
+        };
+      };
+    };
+  };
+  "/api/Resource/{resourceId}": {
+    /** Get a an exact existing resource */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description Resource identifier */
+          resourceId: number;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseCourseDto"];
+            "application/json": components["schemas"]["ResponseCourseDto"];
+            "text/json": components["schemas"]["ResponseCourseDto"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetails"];
+            "application/json": components["schemas"]["ErrorDetails"];
+            "text/json": components["schemas"]["ErrorDetails"];
+          };
+        };
+      };
+    };
+    /** Update an existing resource */
+    put: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description Resource identifier */
+          resourceId: number;
+        };
+      };
+      requestBody?: {
+        content: {
+          "multipart/form-data": {
+            Name?: string;
+            Description?: string;
+            /** Format: binary */
+            Resource?: string;
+            IsEnabled?: boolean;
+            /** Format: int64 */
+            Id?: number;
+          };
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseCourseDto"];
+            "application/json": components["schemas"]["ResponseCourseDto"];
+            "text/json": components["schemas"]["ResponseCourseDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetails"];
+            "application/json": components["schemas"]["ErrorDetails"];
+            "text/json": components["schemas"]["ErrorDetails"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetails"];
+            "application/json": components["schemas"]["ErrorDetails"];
+            "text/json": components["schemas"]["ErrorDetails"];
+          };
+        };
+      };
+    };
+    /** Delete an existing resource */
+    delete: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description Resource identifier */
+          resourceId: number;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": boolean;
+            "application/json": boolean;
+            "text/json": boolean;
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetails"];
+            "application/json": components["schemas"]["ErrorDetails"];
+            "text/json": components["schemas"]["ErrorDetails"];
           };
         };
         /** @description Internal Server Error */
@@ -256,6 +568,18 @@ export interface components {
      * @enum {integer}
      */
     LogLevel: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+    RequestCourseDto: {
+      name?: string | null;
+      description?: string | null;
+      /** Format: double */
+      cost?: number;
+      isPackage?: boolean;
+      isEnabled?: boolean;
+      /** Format: int32 */
+      duration?: number;
+      /** Format: int64 */
+      id?: number;
+    };
     RequestUserLoginDto: {
       nickName?: string | null;
       password?: string | null;

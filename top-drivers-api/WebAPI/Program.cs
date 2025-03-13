@@ -1,6 +1,7 @@
 using WebAPI.Authorization;
 using WebAPI.Configuration;
 using WebAPI.Configuration.Authentication;
+using WebAPI.Configuration.ResourceLibrary;
 using WebAPI.Configuration.Swagger;
 
 var TopDriverSpecificOrigins = "_topDriverSpecificOrigins";
@@ -38,17 +39,17 @@ builder.Services.ConfigureFluentValidation();
 
 builder.Services.ConfigureSwagger();
 
+builder.Services.ConfigureResourceLibrary(configuration);
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: TopDriverSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("http://localhost:5173",
-                                            "https://newsite.escuelademanejotopdrivers.com",
-                                            "http://newsite.escuelademanejotopdrivers.com ")  
+                          policy.WithOrigins("http://localhost:5173")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod()
-                                .AllowCredentials(); 
+                                .AllowCredentials();
                       });
 });
 
