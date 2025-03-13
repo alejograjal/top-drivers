@@ -30,7 +30,7 @@ public interface IResourceService
     /// Get all the resources
     /// </summary>
     /// <returns>List of resources Dto</returns>
-    Task<IReadOnlyCollection<ResponseResourceDto>> GetAllAsync();
+    Task<IReadOnlyCollection<ResponseSimpleResourceDto>> GetAllAsync();
 
     /// <summary>
     /// Get existing resource

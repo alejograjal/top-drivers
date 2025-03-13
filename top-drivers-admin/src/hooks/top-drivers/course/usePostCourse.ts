@@ -41,7 +41,7 @@ export const usePostCourse = ({ onSuccess, onError, onSettled }: usePostCoursePr
         },
         onSuccess: async (data: Course, variables: CourseRequest) => {
             await queryClient.invalidateQueries({
-                queryKey: ['GetCourse']
+                queryKey: ['GetCourseById', 'GetCourses']
             })
             onSuccess?.(data, variables)
         }

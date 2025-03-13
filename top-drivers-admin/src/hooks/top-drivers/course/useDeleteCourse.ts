@@ -39,7 +39,7 @@ export const useDeleteCourse = ({
         },
         onSuccess: async (data: boolean, variables: number) => {
             await queryClient.invalidateQueries({
-                queryKey: ['Courses']
+                queryKey: ['GetCourseById', 'GetCourses']
             })
             onSuccess?.(data, variables)
         },

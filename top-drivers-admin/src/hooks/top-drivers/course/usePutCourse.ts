@@ -41,7 +41,7 @@ export const usePutCourse = ({ onSuccess, onError, onSettled }: usePutCourseProp
         },
         onSuccess: async (data: Course, variables: CourseRequest) => {
             await queryClient.invalidateQueries({
-                queryKey: ['GetCourse']
+                queryKey: ['GetCourseById', variables.id, 'GetCourses']
             })
             onSuccess?.(data, variables)
         }

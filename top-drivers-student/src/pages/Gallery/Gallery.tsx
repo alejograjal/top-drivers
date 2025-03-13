@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import ImageGallery from "react-image-gallery";
+import { useGetImages } from "hooks/api/useGetImages";
 import 'react-image-gallery/styles/css/image-gallery.css';
-
-const BASE_URL = "https://escuelademanejotopdrivers.com:8080";
+import { ErrorProcess } from "components/Error/ErrorProcess";
+import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess";
 
 interface ImageItem {
     original: string;
@@ -10,34 +11,28 @@ interface ImageItem {
 }
 
 export const Gallery = () => {
+    const { data, isLoading, isError } = useGetImages();
     const [images, setImages] = useState<ImageItem[]>([]);
 
-    const fetchImages = async () => {
-        try {
-            const response = await fetch(`${BASE_URL}/`);
-
-            if (!response.ok) {
-                throw new Error("Failed to fetch image data");
-            }
-
-            const text = await response.text();
-
-            const imagePaths = Array.from(text.matchAll(/<a href="([^"]+\.(?:jpe?g))">/g)).map(match => match[1]);
-
-            const imageItems = imagePaths.map((imagePath) => ({
-                original: `${BASE_URL}/${imagePath}`,
-                thumbnail: `${BASE_URL}/${imagePath}`,
-            }));
-
-            setImages(imageItems);
-        } catch (error) {
-            console.error("Error fetching images:", error);
-        }
-    };
-
     useEffect(() => {
-        fetchImages();
-    }, []);
+        if (data && Array.isArray(data)) {
+            const imageItems = data
+                .filter((image) => image.url)
+                .map((image) => ({
+                    original: image.url ?? "",
+                    thumbnail: image.url ?? "",
+                }));
+            setImages(imageItems);
+        }
+    }, [data]);
+
+    if (isLoading) {
+        return <CircularLoadingProgress />
+    }
+
+    if (isError) {
+        return <ErrorProcess />
+    }
 
     return (
         <section className="section gallery" id="gallery">

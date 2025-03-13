@@ -13,7 +13,7 @@ using Utilities;
 
 namespace Application.Services.Authentication;
 
-public class IdentityService(IUserService userService, ITokenMasterService tokenMasterService, AuthenticationConfiguration authenticationConfiguration, 
+public class IdentityService(IUserService userService, ITokenMasterService tokenMasterService, AuthenticationConfiguration authenticationConfiguration,
                                 TokenValidationParameters tokenValidationParameters) : IIdentityService
 {
     public async Task<TokenModel> LoginAsync(RequestUserLoginDto login)
@@ -117,7 +117,7 @@ public class IdentityService(IUserService userService, ITokenMasterService token
 
         existingRefreshToken.Used = true;
         await tokenMasterService.UpdateAsync(existingRefreshToken);
-        var usuario = await userService.GetByIdAsync(long.Parse(validatedToken.Claims.Single(x => x.Type == "IdUsuario").Value));
+        var usuario = await userService.GetByIdAsync(long.Parse(validatedToken.Claims.Single(x => x.Type == "UserId").Value));
 
         return await AuthenticateAsync(usuario!);
     }

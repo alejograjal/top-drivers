@@ -1,29 +1,17 @@
 {
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
   "compilerOptions": {
-    "target": "es5",
-    "useDefineForClassFields": true,
-    "inlineSources": true,
-    "sourceMap": false,
-    "inlineSourceMap": true,
-    "sourceRoot": "/",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
     "paths": {
       "assets/*": [
@@ -35,14 +23,8 @@
       "pages/*": [
         "src/pages/*"
       ],
-      "contexts/*": [
-        "src/contexts/*"
-      ],
       "hooks/*": [
         "src/hooks/*"
-      ],
-      "utils/*": [
-        "src/utils/*"
       ],
       "api/*": [
         "src/api/*"
@@ -50,12 +32,18 @@
       "types/*": [
         "src/types/*"
       ],
-    },
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+      "utils/*": [
+        "src/utils/*"
+      ],
+      "navigation/*": [
+        "src/navigation/*"
+      ],
+      "stores/*": [
+        "src/stores/*"
+      ],
+      "contexts/*": [
+        "src/contexts/*"
+      ]
+    }
   },
-  "include": [
-    "src/**/*",
-    "*.ts"
-  ]
 }

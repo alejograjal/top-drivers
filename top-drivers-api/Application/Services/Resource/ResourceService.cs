@@ -8,6 +8,7 @@ using Application.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Application.Models.DTOs.Resource;
 using Application.Models.DTOs.ResourceLibrary;
+using System.Diagnostics;
 
 namespace Application.Services;
 
@@ -28,6 +29,9 @@ public class ResourceService(ICoreService<Resource> coreService, ResourceLibrary
         {
             await requestResourceDto.Resource.CopyToAsync(fileStream);
         }
+
+        Process.Start("chown", $"www-data:www-data \"{resource.Path}\"")?.WaitForExit();
+        Process.Start("chmod", $"644 \"{resource.Path}\"")?.WaitForExit();
 
         var data = await coreService.UnitOfWork.Repository<Resource>().AddAsync(resource);
         await coreService.UnitOfWork.SaveChangesAsync();
@@ -59,11 +63,11 @@ public class ResourceService(ICoreService<Resource> coreService, ResourceLibrary
     }
 
     /// <inheritdoc />
-    public async Task<IReadOnlyCollection<ResponseResourceDto>> GetAllAsync()
+    public async Task<IReadOnlyCollection<ResponseSimpleResourceDto>> GetAllAsync()
     {
         var query = coreService.UnitOfWork.Repository<Resource>().AsQueryable().Where(m => m.IsActive && m.IsEnabled);
 
-        return coreService.AutoMapper.Map<IReadOnlyCollection<ResponseResourceDto>>(await query.ToListAsync());
+        return coreService.AutoMapper.Map<IReadOnlyCollection<ResponseSimpleResourceDto>>(await query.ToListAsync());
     }
 
     /// <inheritdoc />
@@ -92,19 +96,30 @@ public class ResourceService(ICoreService<Resource> coreService, ResourceLibrary
         var existingResource = await GetByIdAsync(requestResourceDto.Id);
 
         var resource = ValidateResource(requestResourceDto);
-        resource.Path = Path.Combine(resourceLibraryPath.Path, $"{resource.Name}{Path.GetExtension(requestResourceDto.Resource.FileName)}");
-        resource.Url = Path.Combine(resourceLibraryPath.Url, $"{resource.Name}{Path.GetExtension(requestResourceDto.Resource.FileName)}");
         resource.Id = requestResourceDto.Id;
         resource.IsActive = true;
-
-        using (var fileStream = new FileStream(resource.Path, FileMode.Create, FileAccess.Write))
+        if (requestResourceDto.Resource != null)
         {
-            await requestResourceDto.Resource.CopyToAsync(fileStream);
+            resource.Path = Path.Combine(resourceLibraryPath.Path, $"{resource.Name}{Path.GetExtension(requestResourceDto.Resource.FileName)}");
+            resource.Url = Path.Combine(resourceLibraryPath.Url, $"{resource.Name}{Path.GetExtension(requestResourceDto.Resource.FileName)}");
+
+            using (var fileStream = new FileStream(resource.Path, FileMode.Create, FileAccess.Write))
+            {
+                await requestResourceDto.Resource.CopyToAsync(fileStream);
+            }
+
+            Process.Start("chown", $"www-data:www-data \"{resource.Path}\"")?.WaitForExit();
+            Process.Start("chmod", $"644 \"{resource.Path}\"")?.WaitForExit();
+
+            if (File.Exists(existingResource.Path))
+            {
+                File.Delete(existingResource.Path);
+            }
         }
-
-        if (File.Exists(existingResource.Path))
+        else
         {
-            File.Delete(existingResource.Path);
+            resource.Path = existingResource.Path;
+            resource.Url = existingResource.Url;
         }
 
         coreService.UnitOfWork.Repository<Resource>().Update(resource);

@@ -15,6 +15,6 @@ public class CourseValidator : AbstractValidator<Course>
         RuleFor(x => x.Description)
             .NotEmpty().WithMessage("La descripción no puede estar vacía")
             .NotNull().WithMessage("La descripción es requerida")
-            .MaximumLength(50).WithMessage("La descripción no puede exceder los 300 caracteres");
+            .MaximumLength(300).WithMessage("La descripción no puede exceder los 300 caracteres");
     }
 }

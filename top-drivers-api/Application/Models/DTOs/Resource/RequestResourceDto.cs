@@ -9,7 +9,7 @@ public class RequestResourceDto : RequestBaseDto
 
     public string Description { get; set; } = null!;
 
-    public IFormFile Resource { get; set; } = null!;
+    public IFormFile? Resource { get; set; }
 
     public bool IsEnabled { get; set; }
 }

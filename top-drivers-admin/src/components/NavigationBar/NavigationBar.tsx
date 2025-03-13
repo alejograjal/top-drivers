@@ -4,7 +4,8 @@ import { Content } from "./Content"
 import { useLayout } from "hooks/useLayout"
 import { useNavBar } from "stores/useNavBar"
 import { APP_BAR_HEIGHT } from "../AppBar/AppBar"
-import { Box, Divider, Drawer } from "@mui/material"
+import { Box, Divider, Drawer, Typography } from "@mui/material"
+import logoTopDrivers from 'assets/logoTopDrivers.webp'
 import { useSideNavCollapseStore } from "stores/useSideNavCollapseStore"
 
 export const NAVIGATION_BAR_WIDTH = 265
@@ -43,7 +44,21 @@ export const NavigationBar = () => {
                 onClose={close}
             >
                 <Box mt={1} sx={{ ml: 2 }}>
-                    IMG
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            marginLeft: '5px',
+                            width: '100%',
+                            gap: 1
+                        }}
+                    >
+                        <img src={logoTopDrivers} alt="Logo Top Drivers" style={{ height: '40px' }} />
+                        <Typography variant="h4" sx={{ color: 'common.white' }}>
+                            Top Drivers
+                        </Typography>
+                    </Box>
                 </Box>
                 <Divider />
                 <Content />

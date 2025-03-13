@@ -1,19 +1,19 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { useTypedApiClient } from "../../hooks/useTypeApiClient";
-import { Course } from "types/api";
+import { Image } from "types/api";
 
-export const useGetCourses = (): UseQueryResult<Array<Course>> => {
-    const getCourses = useTypedApiClient({
-        path: '/api/student-Course',
+export const useGetImages = (): UseQueryResult<Array<Image>> => {
+    const getImages = useTypedApiClient({
+        path: '/api/student-Resource',
         method: 'get'
     })
 
     return useQuery({
         queryKey: [
-            'student-Course'
+            'student-Resource'
         ],
         queryFn: async () => {
-            const { data } = await getCourses({});
+            const { data } = await getImages({});
             return data;
         },
         enabled: true

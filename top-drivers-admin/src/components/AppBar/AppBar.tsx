@@ -1,7 +1,8 @@
 import { MainContent } from "./MainContent"
 import { useNavBar } from "stores/useNavBar"
 import MenuIcon from '@mui/icons-material/Menu'
-import { Box, IconButton, AppBar as MuiAppBar, Stack, Toolbar } from "@mui/material"
+import logoTopDrivers from 'assets/logoTopDrivers.webp'
+import { Box, IconButton, AppBar as MuiAppBar, Stack, Toolbar, Typography } from "@mui/material"
 
 export const APP_BAR_HEIGHT = 65
 
@@ -29,7 +30,21 @@ export const AppBar = () => {
                         }
                     }}
                 >
-                    IMG
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            marginLeft: '5px',
+                            width: '100%',
+                            gap: 1
+                        }}
+                    >
+                        <img src={logoTopDrivers} alt="Logo Top Drivers" style={{ height: '40px' }} />
+                        <Typography variant="h4" sx={{ color: 'common.white' }}>
+                            Top Drivers
+                        </Typography>
+                    </Box>
                 </Box>
                 <Stack
                     direction='row'

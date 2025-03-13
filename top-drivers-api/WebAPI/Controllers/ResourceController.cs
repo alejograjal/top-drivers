@@ -2,7 +2,10 @@ using Application.Interfaces;
 using Application.Models;
 using Application.Models.DTOs;
 using Application.Models.DTOs.Resource;
+using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.Configuration.Authorization;
 
 namespace WebAPI.Controllers;
 
@@ -10,7 +13,10 @@ namespace WebAPI.Controllers;
 /// Resource controller
 /// </summary>
 [ApiController]
+[ApiVersion("1.0")]
+[TopDriversAuthorize]
 [Route("api/[controller]")]
+[Authorize(Policy = "TopDrivers")]
 public class ResourceController(IResourceService resourceService) : ControllerBase
 {
     /// <summary>
@@ -31,6 +37,7 @@ public class ResourceController(IResourceService resourceService) : ControllerBa
     /// Get a list of all resources
     /// </summary>
     /// <returns>Action result with the full list of resources</returns>
+    [AllowAnonymous]
     [HttpGet("~/api/student-[controller]")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ResponseSimpleResourceDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetails))]

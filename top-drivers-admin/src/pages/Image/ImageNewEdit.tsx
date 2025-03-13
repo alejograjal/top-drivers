@@ -1,5 +1,5 @@
 import { isNil } from "lodash"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { isPresent } from "utils/util"
 import { useLayout } from "hooks/useLayout"
 import { Page } from "components/Shared/Page"
@@ -32,7 +32,7 @@ export const ImageNewEdit = ({ imageData }: { imageData: Image | undefined | nul
     const [openModalConfirmation, setOpenModalConfirmation] = useState(false);
 
     const formMethods = useForm({
-        resolver: yupResolver(ImageSchema),
+        resolver: yupResolver(ImageSchema(isExisting)),
         defaultValues: !isExisting ? ImageDefaultValues : {
             id: Number(imageData?.id),
             name: String(imageData?.name),
@@ -103,7 +103,7 @@ export const ImageNewEdit = ({ imageData }: { imageData: Image | undefined | nul
         const formatedData = {
             Name: data.name,
             Description: data.description,
-            Resource: data.resource,
+            Resource: data.resource instanceof File ? data.resource : null,
             IsEnabled: data.isEnabled,
         }
 
@@ -117,6 +117,18 @@ export const ImageNewEdit = ({ imageData }: { imageData: Image | undefined | nul
             ...formatedData
         })
     })
+
+    useEffect(() => {
+        if (imageData) {
+            formMethods.reset({
+                id: Number(imageData.id),
+                name: String(imageData.name),
+                description: String(imageData.description),
+                resource: undefined,
+                isEnabled: imageData.isEnabled,
+            });
+        }
+    }, [imageData, formMethods]);
 
     return (
         <Page

@@ -2,7 +2,7 @@ import { transformErrorKeys } from "utils/util"
 import { useMutation } from "@tanstack/react-query"
 import { ApiError } from "openapi-typescript-fetch"
 import { castRequestBody, useTypedApiClientBS } from "hooks/useTypedApiClientBS"
-import { Authentication, BaseReservationErrorDetails, LoginUserRequest } from "types/api-basereservation"
+import { Authentication, TopDriversErrorDetails, LoginUserRequest } from "types/api-basereservation"
 
 interface usePostAuthenticationProps {
     onSuccess?: (
@@ -10,7 +10,7 @@ interface usePostAuthenticationProps {
         variables: LoginUserRequest
     ) => void,
     onError?: (
-        data: BaseReservationErrorDetails,
+        data: TopDriversErrorDetails,
         variables: LoginUserRequest
     ) => void
 }
@@ -33,7 +33,7 @@ export const usePostAuthentication = ({
         },
         onSuccess,
         onError: (error: ApiError, _) => {
-            onError?.(transformErrorKeys(error.data) as BaseReservationErrorDetails, _)
+            onError?.(transformErrorKeys(error.data) as TopDriversErrorDetails, _)
         }
     })
 }

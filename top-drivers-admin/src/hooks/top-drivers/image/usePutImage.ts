@@ -52,7 +52,7 @@ export const usePutImage = ({ onSuccess, onError, onSettled }: usePutImageProps)
         },
         onSuccess: async (data: Image, variables: ImageRequest) => {
             await queryClient.invalidateQueries({
-                queryKey: ['GetImage']
+                queryKey: ['GetImages', 'GetImageById']
             })
             onSuccess?.(data, variables)
         }

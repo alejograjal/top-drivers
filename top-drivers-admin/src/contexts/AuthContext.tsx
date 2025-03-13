@@ -53,7 +53,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const login = useCallback(async (data: LoginTypeForm) => {
         try {
-            postAuthenticationUser(data);
+            await postAuthenticationUser(data);
         } catch (error) {
             setSnackbarMessage(`Error al intentar iniciar sesión: ${error}`, 'error');
         }

@@ -39,7 +39,7 @@ export const useDeleteImage = ({
         },
         onSuccess: async (data: boolean, variables: number) => {
             await queryClient.invalidateQueries({
-                queryKey: ['Images']
+                queryKey: ['GetImages', 'GetImageById']
             })
             onSuccess?.(data, variables)
         },

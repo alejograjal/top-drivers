@@ -18,10 +18,17 @@ export const LoginForm = () => {
     const { handleSubmit, control, formState: { errors } } = formMethods;
     const { login, isAuthenticated } = useAuth();
 
-    const createLoginWrapper = useCallback((data: LoginTypeForm) => {
-        setLoading(true)
-        login(data);
-        setLoading(false)
+    const createLoginWrapper = useCallback(async (data: LoginTypeForm) => {
+        setLoading(true);
+        try {
+            await login(data);
+        } catch (error) {
+            console.error('Error during login:', error);
+        } finally {
+            setTimeout(() => {
+                setLoading(false);
+            }, 500);
+        }
     }, [login]);
 
     useEffect(() => {
@@ -105,7 +112,7 @@ export const LoginForm = () => {
                         Ingresar
                     </Button>
                 </Box>
-            </FormProvider>
-        </Box>
+            </FormProvider >
+        </Box >
     )
 }

@@ -8,17 +8,28 @@ export const ImageDefaultValues = {
     isEnabled: true,
 }
 
-export const ImageSchema = object().shape({
+export const ImageSchema = (isExisting: boolean) => object().shape({
     id: number(),
     name: string().required('El nombre es requerido'),
     description: string().required('La descripción es requerida'),
-    resource: mixed<File>()
-        .required("El archivo es requerido")
+    resource: mixed()
+        .test("resourceRequired", "El archivo es requerido", function (value) {
+            if (!isExisting && !value) { // Si no es una edición, y no hay archivo
+                return this.createError({ message: "El archivo es requerido" });
+            }
+            return true;
+        })
         .test("fileSize", "El archivo es muy grande (máx. 5MB)", (value) => {
-            return value && value.size <= 5 * 1024 * 1024;
+            if (value instanceof File) {
+                return value.size <= 5 * 1024 * 1024;
+            }
+            return true;
         })
         .test("fileType", "Formato no permitido (solo JPG/PNG)", (value) => {
-            return value && ["image/jpeg", "image/png"].includes(value.type);
+            if (value instanceof File) {
+                return ["image/jpeg", "image/png"].includes(value.type);
+            }
+            return true;
         }),
     isEnabled: boolean(),
 })

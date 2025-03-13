@@ -11,7 +11,7 @@ export const useGetImageById = (imageId: string | undefined): UseQueryResult<Ima
     const getImage = useTypedApiClientBS({ path, method });
 
     return useQuery({
-        queryKey: ["GetImage", imageId],
+        queryKey: ["GetImageById", imageId],
         queryFn: async () => {
             const { data } = await getImage(castRequestBody({ resourceId: Number(imageId) }, path, method));
             return data;

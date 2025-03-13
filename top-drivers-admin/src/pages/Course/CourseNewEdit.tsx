@@ -1,5 +1,5 @@
 import { isNil } from "lodash";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { isPresent } from "utils/util";
 import { useLayout } from "hooks/useLayout";
 import { Page } from "components/Shared/Page";
@@ -97,6 +97,20 @@ export const CourseNewEdit = ({ courseData }: { courseData: Course | undefined |
             ...formatedData
         })
     })
+
+    useEffect(() => {
+        if (courseData) {
+            formMethods.reset({
+                id: Number(courseData.id),
+                name: String(courseData.name),
+                description: String(courseData.description),
+                cost: String(courseData.cost),
+                isPackage: courseData.isPackage,
+                isEnabled: courseData.isEnabled,
+                duration: courseData.duration
+            });
+        }
+    }, [courseData, formMethods]);
 
     return (
         <Page

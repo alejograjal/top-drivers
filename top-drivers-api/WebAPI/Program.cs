@@ -46,9 +46,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: TopDriverSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("http://localhost:5173",
-                                            "https://newsite.escuelademanejotopdrivers.com",
-                                            "http://newsite.escuelademanejotopdrivers.com ")
+                          policy.WithOrigins("http://localhost:5173")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod()
                                 .AllowCredentials();
