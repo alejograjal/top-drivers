@@ -7,10 +7,14 @@ import { useHeightActiveModalHeader } from "stores/useHeightActiveModalHeader"
 const commonSxModalProps: SxProps<Theme> = {
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     borderTopLeftRadius: '8px',
     borderTopRightRadius: '8px',
-    borderBottom: '1px solid #fff'
+    borderBottom: '1px solid #fff',
+    display: 'flex',
+    px: { xs: 2, sm: 4 },
+    py: { xs: 2, sm: 3 }
 }
 
 interface ModalHeaderProps {
@@ -47,24 +51,27 @@ export const ModalHeader = ({
 
     return (
         <Box sx={commonSxModalProps} ref={ref}>
-            <Box px={{ xs: 1, sm: 4 }} py={{ xs: 2, sm: 3 }} width="100%">
+            <Box>
                 {isPresent(title) && (
-                    <Typography variant="h2" fontWeight='bold'>
+                    <Typography variant="h2" fontWeight='bold' sx={{ fontSize: { xs: "2rem", sm: "2.5rem" } }}>
                         {title}
                     </Typography>
                 )}
                 {isPresent(subTitle) && (
                     <Box>
-                        <Typography variant="body1">{subTitle}</Typography>
+                        <Typography variant="body1" sx={{ fontSize: { xs: "1.25rem", sm: "1.5rem" } }} >{subTitle}</Typography>
                         {isPresent(secondSubTitle) && (
-                            <Typography variant="body2">{secondSubTitle}</Typography>
+                            <Typography variant="body2" sx={{ fontSize: { xs: "1rem", sm: "1.25rem" } }}>{secondSubTitle}</Typography>
                         )}
                     </Box>
                 )}
             </Box>
             <Box
                 onClick={toggleIsOpen}
-                sx={{ cursor: 'pointer' }}
+                sx={{
+                    cursor: 'pointer',
+                    ml: 'auto'
+                }}
             >
                 {isPresent(showIconClose) && <CloseIcon />}
             </Box>

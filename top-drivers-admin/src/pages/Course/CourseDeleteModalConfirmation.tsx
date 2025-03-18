@@ -66,13 +66,14 @@ export const CourseDeleteModalConfirmation = ({
                 </Typography>
             </ModalBody>
             <ModalFooter>
-                <Stack direction='row' spacing={2}>
-                    <Button variant="outlined" onClick={toggleIsOpen}>Cancelar</Button>
+                <Stack direction='row' spacing={2} width="100%">
+                    <Button variant="outlined" onClick={toggleIsOpen} sx={{ flex: 1 }}>Cancelar</Button>
                     <Button
                         loading={loading}
                         loadingPosition="start"
                         variant="contained"
                         onClick={handleConfirm}
+                        sx={{ flex: 1 }}
                     >
                         Confirmar
                     </Button>

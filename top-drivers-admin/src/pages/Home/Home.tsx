@@ -5,8 +5,10 @@ import { StatCard } from "components/Card/StatCard";
 import SchoolIcon from "@mui/icons-material/School";
 import { useGetImages } from "hooks/top-drivers/image/useGetImages";
 import { useGetCourses } from "hooks/top-drivers/course/useGetCourses";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
+    const navigate = useNavigate();
     const { data: courses, isLoading: loadingCourses } = useGetCourses();
     const { data: images, isLoading: loadingImages } = useGetImages();
 
@@ -18,12 +20,14 @@ export const Home = () => {
                     value={loadingCourses ? "..." : courses?.length || 0}
                     icon={<SchoolIcon fontSize="large" />}
                     color="#1976D2"
+                    onclick={() => navigate('/Curso')}
                 />
                 <StatCard
                     title="Total de Imágenes"
                     value={loadingImages ? "..." : images?.length || 0}
                     icon={<ImageIcon fontSize="large" />}
                     color="#D32F2F"
+                    onclick={() => navigate('/Imagen')}
                 />
             </Stack>
         </Page>

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Box } from "@mui/material";
 import { useLayout } from "hooks/useLayout"
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useHeightActiveModalHeader } from "stores/useHeightActiveModalHeader";
 
 interface ModalBodyProps {
@@ -19,15 +19,16 @@ export const ModalBody = ({
     const heightActiveModalHeader = useHeightActiveModalHeader((state) => state.height)
 
     const footerHeight = 80;
-    const [height, setHeight] = useState<number>();
-    const [maxHeight, setMaxHeight] = useState<number>();
+    const modalHeightPercentage = useMemo(() => parseInt(heightModal) / 100, [heightModal]);
 
-    const onResize = () => {
-        setHeight(
-            window.innerHeight * (parseInt(heightModal) / 100) - (heightActiveModalHeader + footerHeight)
-        );
-        setMaxHeight(window.innerHeight - (heightActiveModalHeader + footerHeight));
-    }
+    const [height, setHeight] = useState<number>(0);
+    const [maxHeight, setMaxHeight] = useState<number>(0);
+
+    const onResize = useCallback(() => {
+        const availableHeight = window.innerHeight - (heightActiveModalHeader + footerHeight);
+        setHeight(window.innerHeight * modalHeightPercentage - (heightActiveModalHeader + footerHeight));
+        setMaxHeight(availableHeight);
+    }, [modalHeightPercentage, heightActiveModalHeader]);
 
     useEffect(() => {
         window.addEventListener('resize', onResize);
@@ -40,13 +41,13 @@ export const ModalBody = ({
     return (
         <Box
             component='div'
-            maxHeight={maxHeight}
-            height={height}
-            overflow={'auto'}
-            px={{ xs: 2, sm: 4 }}
-            py={{ xs: 3, sm: 3 }}
             sx={{
-                ...(isMobile ? { width: '108vw' } : {}),
+                maxHeight,
+                height,
+                overflow: 'auto',
+                px: { xs: 2, sm: 4 },
+                py: { xs: 3, sm: 3 },
+                width: isMobile ? '100%' : 'auto', // Evita desplazamientos horizontales innecesarios
                 ...sx
             }}
         >

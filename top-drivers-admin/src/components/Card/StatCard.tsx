@@ -6,13 +6,14 @@ interface StatCardProps {
     value: string | number;
     icon: React.ReactNode;
     color: string;
+    onclick?: () => void;
 }
 
-export const StatCard = ({ title, value, icon, color }: StatCardProps) => {
+export const StatCard = ({ title, value, icon, color, onclick }: StatCardProps) => {
     const isMobile = useLayout();
 
     return (
-        <Card sx={{
+        <Card onClick={onclick} sx={{
             display: "flex",
             alignItems: "center",
             flexDirection: isMobile ? "column" : "row",
@@ -23,7 +24,8 @@ export const StatCard = ({ title, value, icon, color }: StatCardProps) => {
             borderRadius: 2,
             bgcolor: "#1E1E2F",
             color: "white",
-            textAlign: isMobile ? "center" : "left"
+            textAlign: isMobile ? "center" : "left",
+            cursor: "pointer",
         }}>
             <Box sx={{
                 bgcolor: color,
@@ -44,7 +46,7 @@ export const StatCard = ({ title, value, icon, color }: StatCardProps) => {
                 <Typography variant="h3" fontWeight="bold">
                     {value}
                 </Typography>
-            </CardContent>
-        </Card>
+            </CardContent >
+        </Card >
     );
 };
